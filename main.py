@@ -28,6 +28,10 @@ class App:
 
     def start(self):
 
+        self.tcp.connect()
+
+        self.dashboard.update_status(self.tcp.connected)
+
         self.timer.start(30)
 
     def stop(self):
@@ -46,8 +50,12 @@ class App:
 
         if servos is not None:
 
-            self.tcp.send_servos(servos)
+            if self.tcp.connected:
+                self.tcp.send_servos(servos)
+
             self.dashboard.update_servos(servos)
+
+        self.dashboard.update_status(self.tcp.connected)
 
         self.dashboard.update_camera(frame)
 
