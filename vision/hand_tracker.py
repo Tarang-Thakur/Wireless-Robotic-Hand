@@ -1,6 +1,5 @@
 import cv2
-import mediapipe as mp
-
+from mediapipe.python.solutions import hands, drawing_utils
 
 class HandTracker:
 
@@ -11,8 +10,8 @@ class HandTracker:
 
         self.cap = cv2.VideoCapture(0)
 
-        self.mp_hands = mp.solutions.hands
-        self.mp_draw = mp.solutions.drawing_utils
+        self.mp_hands = hands
+        self.mp_draw = drawing_utils
 
         self.hands = self.mp_hands.Hands(
             max_num_hands=max_hands,
